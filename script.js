@@ -1,4 +1,5 @@
 window.onload = function() {
+ var canvas
  var canvasW =900;
  var canvasH =600;
  var ctx; 
