@@ -3,7 +3,7 @@ window.onload = function() {
     var canvasH =600;
     var blockSize = 30;
     var ctx; 
-    var delay = 100; 
+    var delay = 200; 
     var snakee;
     var applee;
     var widthInBlocks = canvasW/blockSize;
@@ -29,7 +29,8 @@ window.onload = function() {
             else{
                 if(snakee.isEatingApple(applee)){
                     //LE SERPENT A MANGER LAPOMME
-                   do {
+                    snakee.ateApple = true ;
+                    do {
                     applee.setNewPosition();
                     }
                     while(applee.isOnSnake(snakee))
@@ -48,6 +49,7 @@ window.onload = function() {
    function Snake (body, direction){
            this.body = body ;
            this.direction = direction ;
+           this.ateApple = false;
            this.draw = function () {
                ctx.save();
                ctx.fillStyle="#ff0000";
@@ -75,7 +77,10 @@ window.onload = function() {
                    throw("Invalid Direction");
              }
              this.body.unshift(nextPosition);
+            if(!this.ateApple)
              this.body.pop();
+            else
+            this.ateApple = false;
            };
            this.setDirection = function (newDirection){
               var allowdDirections;
